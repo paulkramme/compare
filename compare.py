@@ -14,7 +14,7 @@ class color:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def mdsum(file):
+def shasum(file):
     with open(file, "rb") as fd:
         hashedfile = hashlib.sha256()
         for buf in iter(partial(fd.read, 128), b''):
@@ -22,8 +22,8 @@ def mdsum(file):
     return hashedfile.hexdigest()
 
 def main():
-    file1 = mdsum(sys.argv[1])
-    file2 = mdsum(sys.argv[2])
+    file1 = shasum(sys.argv[1])
+    file2 = shasum(sys.argv[2])
     if file1 == file2:
         print(color.OKGREEN + "The files are identical." + color.ENDC)
     else:
