@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-import hashlib
-from functools import partial
-import sys
+import hashlib, functools, sys, os
 
 class color:
     HEADER = '\033[95m'
@@ -17,7 +15,7 @@ class color:
 def shasum(file):
     with open(file, "rb") as fd:
         hashedfile = hashlib.sha256()
-        for buf in iter(partial(fd.read, 128), b''):
+        for buf in iter(functools.partial(fd.read, 128), b''):
             hashedfile.update(buf)
     return hashedfile.hexdigest()
 
