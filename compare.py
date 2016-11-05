@@ -4,7 +4,17 @@ import hashlib
 from functools import partial
 import sys
 
-def mdsum(file):
+class color:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def shasum(file):
     with open(file, "rb") as fd:
         hashedfile = hashlib.sha256()
         for buf in iter(partial(fd.read, 128), b''):
@@ -12,12 +22,12 @@ def mdsum(file):
     return hashedfile.hexdigest()
 
 def main():
-    file1 = mdsum(sys.argv[1])
-    file2 = mdsum(sys.argv[2])
+    file1 = shasum(sys.argv[1])
+    file2 = shasum(sys.argv[2])
     if file1 == file2:
-        print("The files are identical.")
+        print(color.OKGREEN + "The files are identical." + color.ENDC)
     else:
-        print("The file are NOT identical.")
+        print(color.FAIL + "The file are " + color.BOLD + "not identical." + color.ENDC)
 
 if __name__ == __name__:
     main()
