@@ -6,10 +6,9 @@ import sys
 
 def mdsum(file):
     with open(file, "rb") as fd:
-        hashedfile = hashlib.md5()
+        hashedfile = hashlib.sha256()
         for buf in iter(partial(fd.read, 128), b''):
             hashedfile.update(buf)
-    close(fd)
     return hashedfile.hexdigest()
 
 def main():
