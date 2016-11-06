@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
-import hashlib
-from functools import partial
-import sys
+import hashlib, functools, sys, os
+
 
 class color:
     HEADER = '\033[95m'
@@ -14,20 +13,47 @@ class color:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
 def shasum(file):
-    with open(file, "rb") as fd:
-        hashedfile = hashlib.sha256()
-        for buf in iter(partial(fd.read, 128), b''):
-            hashedfile.update(buf)
-    return hashedfile.hexdigest()
+    try:
+        with open(file, "rb") as fd:
+            hashedfile = hashlib.sha256()
+            for buf in iter(functools.partial(fd.read, 128), b''):
+                hashedfile.update(buf)
+        return hashedfile.hexdigest()
+    except FileNotFoundError:
+        print(color.WARNING + "The specified file was not found." + color.ENDC)
+        exit()
+
+
+def mdsum(file):
+    try:
+        with open(file, "rb") as fd:
+            hashedfile = hashlib.md5()
+            for buf in iter(partial(fd.read, 128), b''):
+                hashedfile.update(buf)
+        return hashedfile.hexdigest()
+    except FileNotFoundError:
+        print(color.WARNING + "The specified file was not found." + color.ENDC)
+
 
 def main():
-    file1 = shasum(sys.argv[1])
-    file2 = shasum(sys.argv[2])
-    if file1 == file2:
-        print(color.OKGREEN + "The files are identical." + color.ENDC)
-    else:
-        print(color.FAIL + "The file are " + color.BOLD + "not identical." + color.ENDC)
+    if os.name == "posix":
+        file1 = shasum(sys.argv[1])
+        file2 = shasum(sys.argv[2])
+        if file1 == file2:
+            print(color.OKGREEN + "The files are identical." + color.ENDC)
+        else:
+            print(color.FAIL + "The file are " + color.BOLD + "not identical." + color.ENDC)
+    elif os.name == "nt":
+        file1 = shasum(input("Input first path to file: "))
+        file2 = shasum(input("Input second path to file: "))
+        if file1 == file2:
+            print("The files are identical.")
+        else:
+            print("The files are NOT identical.")
+        input("Press ENTER to quit...")
+
 
 if __name__ == __name__:
     main()
