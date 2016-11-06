@@ -22,6 +22,15 @@ def shasum(file):
     return hashedfile.hexdigest()
 
 
+def mdsum(file):
+    with open(file, "rb") as fd:
+        hashedfile = hashlib.md5()
+        for buf in iter(partial(fd.read, 128), b''):
+            hashedfile.update(buf)
+    return hashedfile.hexdigest()
+
+
+
 def main():
     file1 = shasum(sys.argv[1])
     file2 = shasum(sys.argv[2])
