@@ -15,21 +15,26 @@ class color:
 
 
 def shasum(file):
-    with open(file, "rb") as fd:
-        hashedfile = hashlib.sha256()
-        for buf in iter(functools.partial(fd.read, 128), b''):
-            hashedfile.update(buf)
-    return hashedfile.hexdigest()
+    try:
+        with open(file, "rb") as fd:
+            hashedfile = hashlib.sha256()
+            for buf in iter(functools.partial(fd.read, 128), b''):
+                hashedfile.update(buf)
+        return hashedfile.hexdigest()
+    except FileNotFoundError:
+        print(color.WARNING + "The specified file was not found." + color.ENDC)
+        exit()
 
 
 def mdsum(file):
-    with open(file, "rb") as fd:
-        hashedfile = hashlib.md5()
-        for buf in iter(partial(fd.read, 128), b''):
-            hashedfile.update(buf)
-    return hashedfile.hexdigest()
-
-
+    try:
+        with open(file, "rb") as fd:
+            hashedfile = hashlib.md5()
+            for buf in iter(partial(fd.read, 128), b''):
+                hashedfile.update(buf)
+        return hashedfile.hexdigest()
+    except FileNotFoundError:
+        print(color.WARNING + "The specified file was not found." + color.ENDC)
 
 def main():
     file1 = shasum(sys.argv[1])
