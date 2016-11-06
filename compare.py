@@ -49,9 +49,9 @@ def main():
         file1 = shasum(input("Input first path to file: "))
         file2 = shasum(input("Input second path to file: "))
         if file1 == file2:
-            print(color.OKGREEN + "The files are identical." + color.ENDC)
+            print("The files are identical.")
         else:
-            print(color.FAIL + "The files are NOT identical." + color.ENDC)
+            print("The files are NOT identical.")
         input("Press ENTER to quit...")
 
 
