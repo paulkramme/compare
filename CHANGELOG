@@ -1,0 +1,6 @@
+Version 1.0
+    Features:
+        -Comparing two files with SHA256 sums
+        -Color output
+    Bugs:
+        -None
