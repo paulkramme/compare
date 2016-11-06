@@ -2,6 +2,7 @@
 
 import hashlib, functools, sys, os
 
+
 class color:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -12,12 +13,14 @@ class color:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
 def shasum(file):
     with open(file, "rb") as fd:
         hashedfile = hashlib.sha256()
         for buf in iter(functools.partial(fd.read, 128), b''):
             hashedfile.update(buf)
     return hashedfile.hexdigest()
+
 
 def main():
     file1 = shasum(sys.argv[1])
