@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import hashlib, functools, sys, os
+import hashlib, functools, sys
 
 
 class color:
@@ -36,6 +36,7 @@ def mdsum(file):
     except FileNotFoundError:
         print(color.WARNING + "The specified file was not found." + color.ENDC)
 
+
 def main():
     file1 = shasum(sys.argv[1])
     file2 = shasum(sys.argv[2])
@@ -43,6 +44,7 @@ def main():
         print(color.OKGREEN + "The files are identical." + color.ENDC)
     else:
         print(color.FAIL + "The file are " + color.BOLD + "not identical." + color.ENDC)
+
 
 if __name__ == __name__:
     main()
