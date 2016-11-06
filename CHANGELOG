@@ -8,5 +8,6 @@ Version 1.1
     Features:
         -File not found exception
         -MD5 support
+        -Windows support
     Bugs:
         -None
