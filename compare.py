@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import hashlib, functools, sys
+import hashlib, functools, sys, os
 
 
 class color:
@@ -38,12 +38,21 @@ def mdsum(file):
 
 
 def main():
-    file1 = shasum(sys.argv[1])
-    file2 = shasum(sys.argv[2])
-    if file1 == file2:
-        print(color.OKGREEN + "The files are identical." + color.ENDC)
-    else:
-        print(color.FAIL + "The file are " + color.BOLD + "not identical." + color.ENDC)
+    if os.name == "posix":
+        file1 = shasum(sys.argv[1])
+        file2 = shasum(sys.argv[2])
+        if file1 == file2:
+            print(color.OKGREEN + "The files are identical." + color.ENDC)
+        else:
+            print(color.FAIL + "The file are " + color.BOLD + "not identical." + color.ENDC)
+    elif os.name == "nt":
+        file1 = shasum(input("Input first path to file: "))
+        file2 = shasum(input("Input second path to file: "))
+        if file1 == file2:
+            print("The files are identical.")
+        else:
+            print("The files are NOT identical.")
+        input("Press ENTER to quit...")
 
 
 if __name__ == __name__:
