@@ -54,6 +54,8 @@ def main():
         else:
             print("The files are NOT identical.")
         input("Press ENTER to quit...")
+    else:
+        print("OS not recognized.")
 
 
 if __name__ == __name__:
