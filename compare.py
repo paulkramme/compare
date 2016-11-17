@@ -58,5 +58,5 @@ def main():
         print("OS not recognized.")
 
 
-if __name__ == __name__:
+if __name__ == "__main__":
     main()
