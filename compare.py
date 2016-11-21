@@ -14,7 +14,7 @@ class color:
     UNDERLINE = '\033[4m'
 
 
-def shasum(file):
+def sha256sum(file):
     try:
         with open(file, "rb") as fd:
             hashedfile = hashlib.sha256()
@@ -25,12 +25,23 @@ def shasum(file):
         print(color.WARNING + "The specified file was not found." + color.ENDC)
         exit()
 
+def sha1sum(file):
+    try:
+        with open(file, "rb") as fd:
+            hashedfile = hashlib.sha1()
+            for buf in iter(functools.partial(fd.read, 128), b''):
+                hashedfile.update(buf)
+        return hashedfile.hexdigest()
+    except FileNotFoundError:
+        print(color.WARNING + "The specified file was not found." + color.ENDC)
+        exit()
 
-def mdsum(file):
+
+def md5sum(file):
     try:
         with open(file, "rb") as fd:
             hashedfile = hashlib.md5()
-            for buf in iter(partial(fd.read, 128), b''):
+            for buf in iter(functools.partial(fd.read, 128), b''):
                 hashedfile.update(buf)
         return hashedfile.hexdigest()
     except FileNotFoundError:
@@ -40,8 +51,8 @@ def mdsum(file):
 
 def main():
     if os.name == "posix":
-        file1 = shasum(sys.argv[1])
-        file2 = shasum(sys.argv[2])
+        file1 = sha256sum(sys.argv[1])
+        file2 = sha256sum(sys.argv[2])
         if file1 == file2:
             print(color.OKGREEN + "The files are identical." + color.ENDC)
         else:
