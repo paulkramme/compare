@@ -23,6 +23,7 @@ def sha256sum(file):
         return hashedfile.hexdigest()
     except FileNotFoundError:
         print(color.WARNING + "The specified file was not found." + color.ENDC)
+        return 0
 
 def sha1sum(file):
     try:
@@ -33,6 +34,7 @@ def sha1sum(file):
         return hashedfile.hexdigest()
     except FileNotFoundError:
         print(color.WARNING + "The specified file was not found." + color.ENDC)
+        return 0
 
 
 def md5sum(file):
@@ -44,6 +46,7 @@ def md5sum(file):
         return hashedfile.hexdigest()
     except FileNotFoundError:
         print(color.WARNING + "The specified file was not found." + color.ENDC)
+        return 0
 
 
 def main():
