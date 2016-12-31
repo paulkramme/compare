@@ -47,6 +47,9 @@ def md5sum(file):
     except FileNotFoundError:
         print(color.WARNING + "The specified file was not found." + color.ENDC)
         return "error"
+    except PermissionError:
+        print(color.WARNING + "Permission denied." + color.ENDC)
+        return "permission_denied"
 
 
 def main():
