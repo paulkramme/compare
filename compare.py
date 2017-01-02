@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 import hashlib
 import functools
 import sys
@@ -27,6 +28,7 @@ def sha256sum(file):
     except FileNotFoundError:
         print(color.WARNING + "The specified file was not found." + color.ENDC)
         return "error"
+
 
 def sha1sum(file):
     try:
