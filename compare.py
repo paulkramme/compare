@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-
+import zlib
 import hashlib
 import functools
 import sys
@@ -55,6 +55,13 @@ def md5sum(file):
     except PermissionError:
         print(color.WARNING + "Permission denied." + color.ENDC)
         return "permission_denied"
+
+
+def crc(fileName):
+    prev = 0
+    for eachLine in open(fileName,"rb"):
+        prev = zlib.crc32(eachLine, prev)
+    return "%X"%(prev & 0xFFFFFFFF)
 
 
 def main():
