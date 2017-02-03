@@ -73,8 +73,8 @@ def main():
         else:
             print(color.FAIL + "The file are " + color.BOLD + "not identical." + color.ENDC)
     elif os.name == "nt":
-        file1 = shasum(input("Input first path to file: "))
-        file2 = shasum(input("Input second path to file: "))
+        file1 = sha256sum(input("Input first path to file: "))
+        file2 = sha256sum(input("Input second path to file: "))
         if file1 == file2:
             print("The files are identical.")
         else:
