@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-import zlib
-import hashlib
-import functools
-import sys
-import os
+import zlib, hashlib, functools, sys, os
 
 
 class color:
